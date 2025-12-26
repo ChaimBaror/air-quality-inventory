@@ -1,0 +1,134 @@
+{
+  "common": {
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "search": "Search",
+    "export": "Export",
+    "import": "Import",
+    "details": "Details",
+    "share": "Share",
+    "edit": "Edit",
+    "send": "Send",
+    "copy": "Copy",
+    "upload": "Upload",
+    "download": "Download"
+  },
+  "dashboard": {
+    "title": "Dashboard - Overview",
+    "subtitle": "Monitor and manage your sample inventory with real-time insights",
+    "overdue": "Overdue",
+    "dueSoon": "Due Soon",
+    "expectedThisWeek": "Expected This Week",
+    "underReview": "Under Review",
+    "completed": "Completed",
+    "factoryDistribution": "Sample Distribution by Factory",
+    "additionalDetails": "Additional Details:",
+    "samples": "samples"
+  },
+  "sampleTracker": {
+    "title": "Sample Tracker - Management Table",
+    "searchPlaceholder": "Search: PO, Style or Factory Name...",
+    "noResults": "No results found",
+    "tryDifferentSearch": "Try changing your search terms",
+    "exportToExcel": "Export to Excel",
+    "importFromExcel": "Import from Excel",
+    "samples": "{count} samples",
+    "messageCopied": "Message copied to clipboard!",
+    "tip": "💡 Tip: Copy the message and paste it in WeChat or WhatsApp",
+    "columns": {
+      "po": "PO",
+      "customerPo": "Customer PO",
+      "style": "Style",
+      "factory": "Factory",
+      "sampleType": "Sample Type",
+      "sampleStage": "Sample Stage",
+      "sampleSize": "Sample Size",
+      "owner": "Owner",
+      "status": "Status",
+      "expectedDate": "Due Date",
+      "receivedDate": "Date Received",
+      "reminderSent": "Reminder Sent",
+      "actions": "Actions"
+    },
+    "filterByOwner": "Filter by Owner",
+    "filterByStatus": "Filter by Status",
+    "allOwners": "All Owners",
+    "allStatuses": "All Statuses",
+    "notSent": "Not sent",
+    "status": {
+      "overdue": "Overdue",
+      "expectedThisWeek": "Expected This Week",
+      "underReview": "Under Review",
+      "completed": "Completed"
+    },
+    "notReceived": "Not Received",
+    "shareToWeChat": "Share to WeChat/WhatsApp",
+    "notificationMessage": "Notification Message",
+    "openWhatsApp": "Open WhatsApp",
+    "exportSuccess": "Data exported successfully to Excel!",
+    "exportError": "Error exporting to Excel",
+    "importSuccess": "Imported {count} samples successfully!",
+    "importError": "Import error: {error}",
+    "importDialog": {
+      "title": "Import Samples from Excel",
+      "description": "Select an Excel file (.xlsx) to import. The file should contain the following columns:",
+      "columns": "PO, Style, Factory Name, Sample Type, Status, Expected Date, Received Date, Notes",
+      "selectFile": "Select Excel File",
+      "importing": "Importing...",
+      "importingData": "Importing data..."
+    }
+  },
+  "sampleDetail": {
+    "title": "Sample Details",
+    "po": "PO Number",
+    "customerPo": "Customer PO",
+    "style": "Style",
+    "factory": "Factory",
+    "sampleType": "Sample Type",
+    "sampleStage": "Sample Stage",
+    "sampleSize": "Sample Size",
+    "owner": "Owner",
+    "factoryEmail": "Factory Email",
+    "status": {
+      "overdue": "Overdue",
+      "expectedThisWeek": "Expected This Week",
+      "underReview": "Under Review",
+      "completed": "Completed"
+    },
+    "expectedDate": "Due Date",
+    "receivedDate": "Date Received",
+    "reminderSentDate": "Reminder Sent Date",
+    "history": "History",
+    "imageGallery": "Image Gallery",
+    "uploadImages": "Upload Images",
+    "noImages": "No images. Upload images of the received sample.",
+    "internalNotes": "Internal Notes",
+    "addNote": "Add note...",
+    "created": "Created",
+    "lastUpdated": "Last Updated"
+  },
+  "notifications": {
+    "title": "Weekly Notification Generator",
+    "description": "Find all samples that require notification (overdue or expected this week)",
+    "samplesRequireNotification": "{count} samples require notification",
+    "generateNotifications": "Generate Notifications",
+    "weeklyNotifications": "Weekly Notifications - {count} samples",
+    "copyAllMessages": "Copy All Messages",
+    "notificationMessage": "Hi {factoryName},\n\nRegarding Style {style} for PO {po}, the {sampleType} sample {status}.\n\nExpected date: {expectedDate}\n\nPlease update status.\n\nThank you.",
+    "tip": "💡 Tip: Copy the message and paste it in WeChat or WhatsApp",
+    "copyToClipboard": "Copy to Clipboard",
+    "openWhatsApp": "Open WhatsApp",
+    "messageCopied": "Message copied to clipboard!",
+    "status": {
+      "isOverdue": "is overdue",
+      "isExpectedThisWeek": "is expected this week",
+      "isUnderReview": "is under review",
+      "hasBeenCompleted": "has been completed"
+    }
+  },
+  "app": {
+    "title": "Sample Management System - Inventory Management"
+  }
+}
+
