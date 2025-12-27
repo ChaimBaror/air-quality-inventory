@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { mockShipments, getStatusCounts, getDelayedCount, getArrivingSoonCount, getSupplierStats } from '@/lib/shipmentData';
 import StatusCardsGrid from './StatusCardsGrid';
 import SupplierChart from './SupplierChart';
+import DelayedShipmentsNotifications from './DelayedShipmentsNotifications';
 
 export default function ShipmentDashboard() {
   const t = useTranslations('dashboard');
@@ -52,10 +53,11 @@ export default function ShipmentDashboard() {
           sx={{
             mt: 4,
             display: 'grid',
-            gridTemplateColumns: { xs: '1fr', lg: '1fr' },
+            gridTemplateColumns: { xs: '1fr', lg: '1fr 1fr' },
             gap: 3,
           }}
         >
+          <DelayedShipmentsNotifications />
           <SupplierChart supplierStats={supplierStats} />
         </Box>
       </Container>

@@ -3,18 +3,21 @@
 import { useState, useMemo } from 'react';
 import { Box, Card, Chip, Button, Typography, Alert, Snackbar, MenuItem, Select, FormControl, InputLabel, Checkbox, FormControlLabel } from '@mui/material';
 import { 
-  Download as DownloadIcon, 
+  Download as DownloadIcon,
+  Upload as UploadIcon,
   Send as SendIcon, 
   FilterList as FilterIcon,
 } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
 import { mockShipments, getStatusCounts, getOwners } from '@/lib/shipmentData';
 import { Shipment, ShipmentStatus } from '@/types';
+import { exportShipmentsToExcel, importShipmentsFromExcel } from '@/lib/shipmentExcelUtils';
 import SearchBar from '@/components/common/SearchBar';
 import ShipmentTable from './ShipmentTable';
 import ShipmentDetail from './ShipmentDetail';
 import SendNotificationDialog from './SendNotificationDialog';
 import EditShipmentDialog from './EditShipmentDialog';
+import ImportShipmentDialog from './ImportShipmentDialog';
 
 export default function ShipmentTracker() {
   const t = useTranslations('shipments');
@@ -27,6 +30,8 @@ export default function ShipmentTracker() {
   const [notificationDialog, setNotificationDialog] = useState(false);
   const [editDialog, setEditDialog] = useState(false);
   const [shipmentToEdit, setShipmentToEdit] = useState<Shipment | null>(null);
+  const [importDialog, setImportDialog] = useState(false);
+  const [importing, setImporting] = useState(false);
   const [snackbar, setSnackbar] = useState<{ open: boolean; message: string }>({
     open: false,
     message: '',
@@ -96,6 +101,33 @@ export default function ShipmentTracker() {
   const handleSaveShipment = (updatedShipment: Shipment) => {
     setShipments(prev => prev.map(s => s.id === updatedShipment.id ? updatedShipment : s));
     setSnackbar({ open: true, message: 'Shipment updated successfully!' });
+  };
+
+  const handleExportToExcel = () => {
+    try {
+      exportShipmentsToExcel(shipments, 'shipments_export');
+      setSnackbar({ open: true, message: 'Data exported successfully to Excel!' });
+    } catch (error) {
+      setSnackbar({ open: true, message: 'Error exporting to Excel' });
+    }
+  };
+
+  const handleImportFromExcel = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setImporting(true);
+    try {
+      const importedShipments = await importShipmentsFromExcel(file);
+      setShipments((prev) => [...prev, ...importedShipments]);
+      setSnackbar({ open: true, message: `Imported ${importedShipments.length} shipments successfully!` });
+      setImportDialog(false);
+    } catch (error) {
+      setSnackbar({ open: true, message: `Import error: ${error instanceof Error ? error.message : 'Unknown error'}` });
+    } finally {
+      setImporting(false);
+      event.target.value = '';
+    }
   };
 
   return (
@@ -201,6 +233,7 @@ export default function ShipmentTracker() {
             <Button
               variant="outlined"
               startIcon={<DownloadIcon />}
+              onClick={handleExportToExcel}
               sx={{
                 borderRadius: 3,
                 px: 3,
@@ -219,6 +252,28 @@ export default function ShipmentTracker() {
               }}
             >
               {t('export') || 'Export'}
+            </Button>
+            <Button
+              variant="contained"
+              startIcon={<UploadIcon />}
+              onClick={() => setImportDialog(true)}
+              sx={{
+                borderRadius: 3,
+                px: 3,
+                py: 1.5,
+                fontWeight: 600,
+                fontSize: '0.9375rem',
+                background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+                boxShadow: '0 4px 16px rgba(99, 102, 241, 0.4)',
+                '&:hover': {
+                  transform: 'translateY(-2px)',
+                  boxShadow: '0 8px 24px rgba(99, 102, 241, 0.5)',
+                  background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)',
+                },
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              }}
+            >
+              {t('import') || 'Import Excel'}
             </Button>
           </Box>
         </Box>
@@ -372,6 +427,13 @@ export default function ShipmentTracker() {
           }}
           shipment={shipmentToEdit}
           onSave={handleSaveShipment}
+        />
+
+        <ImportShipmentDialog
+          open={importDialog}
+          importing={importing}
+          onClose={() => setImportDialog(false)}
+          onFileSelect={handleImportFromExcel}
         />
       </Box>
     </Box>

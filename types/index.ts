@@ -91,3 +91,72 @@ export interface FactoryStats {
   underReview: number;
 }
 
+// Order Status Types
+export type OrderStatus = 'draft' | 'pending' | 'confirmed' | 'in_production' | 'ready_to_ship' | 'shipped' | 'delivered' | 'cancelled';
+
+// Order Interface - Purchase Orders from suppliers
+export interface Order {
+  id: string; // unique identifier
+  po_number: string; // Purchase Order number
+  customer_po?: string; // Customer PO number
+  supplier: string; // Supplier/Factory name
+  supplier_phone?: string; // Supplier phone number
+  supplier_email?: string; // Supplier email
+  order_date: Date; // Date when order was placed
+  expected_completion_date?: Date; // Expected production completion date
+  expected_ship_date?: Date; // Expected shipping date
+  actual_ship_date?: Date; // Actual shipping date
+  status: OrderStatus; // Current order status
+  total_value: number; // Total order value in USD
+  currency?: string; // Currency code (default: USD)
+  items?: OrderItem[]; // Order line items
+  shipping_address?: {
+    city: string;
+    state: string;
+    country: string;
+    address?: string;
+  };
+  owner: string; // Person responsible (e.g., "TOMMY", "SARAH")
+  notes?: string; // Additional notes
+  createdAt: Date; // When record was created
+  updatedAt: Date; // Last update timestamp
+  history?: HistoryEntry[]; // Status change history
+  images?: string[]; // Photos of order/products
+  related_shipments?: string[]; // IDs of related shipments
+  email_history?: EmailHistoryEntry[]; // Email sending history
+}
+
+// Email History Entry
+export interface EmailHistoryEntry {
+  id: string;
+  timestamp: Date;
+  recipient: string; // Email address
+  subject: string;
+  status: 'sent' | 'failed';
+  messageId?: string;
+  error?: string;
+  sentBy?: string; // User who sent the email
+}
+
+// Order Item Interface
+export interface OrderItem {
+  id: string;
+  sku?: string; // Product SKU
+  description: string; // Item description
+  quantity: number; // Quantity ordered
+  unit_price: number; // Price per unit
+  total_price: number; // Total price for this item
+  style?: string; // Style number
+  color?: string; // Color
+  size?: string; // Size
+  notes?: string; // Item-specific notes
+}
+
+// Order Statistics
+export interface OrderStats {
+  totalOrders: number;
+  byStatus: Record<OrderStatus, number>;
+  totalValue: number;
+  bySupplier: Record<string, number>;
+}
+

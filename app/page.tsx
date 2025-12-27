@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 import ShipmentDashboard from '@/components/shipments/ShipmentDashboard';
 import ShipmentTracker from '@/components/shipments/ShipmentTracker';
 import TrackersView from '@/components/shipments/TrackersView';
+import OrderTracker from '@/components/orders/OrderTracker';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -108,6 +109,7 @@ export default function Home() {
         >
           <Tab label={t('dashboardTab') || 'Dashboard'} />
           <Tab label={t('trackerTab') || 'Shipment Tracker'} />
+          <Tab label={t('ordersTab') || 'Orders'} />
           <Tab label={t('trackersTab') || 'Multiple Trackers'} />
         </Tabs>
       </Box>
@@ -119,6 +121,9 @@ export default function Home() {
         <ShipmentTracker />
       </TabPanel>
       <TabPanel value={value} index={2}>
+        <OrderTracker />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
         <TrackersView />
       </TabPanel>
     </Box>
