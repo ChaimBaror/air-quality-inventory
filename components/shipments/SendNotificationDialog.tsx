@@ -59,6 +59,7 @@ export default function SendNotificationDialog({
   const [scheduleDay, setScheduleDay] = useState<string>('wednesday');
   const [scheduleTime, setScheduleTime] = useState<string>('09:00');
   const [customMessage, setCustomMessage] = useState<string>('');
+  const [emailSubject, setEmailSubject] = useState<string>('');
   const [sending, setSending] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -86,19 +87,30 @@ export default function SendNotificationDialog({
   const targetShipments = getTargetShipments();
   const targetCount = targetShipments.length;
 
+  const [error, setError] = useState<string | null>(null);
+  const [emailResults, setEmailResults] = useState<{ success: number; failed: number } | null>(null);
+
   const handleSend = async () => {
     if (targetCount === 0) {
-      alert('No shipments selected');
+      setError('No shipments selected');
+      return;
+    }
+
+    // Filter shipments with email addresses for email sending
+    const shipmentsWithEmail = targetShipments.filter(s => s.supplier_email);
+    const shipmentsWithoutEmail = targetShipments.filter(s => !s.supplier_email);
+    
+    if ((method === 'email' || method === 'both') && shipmentsWithEmail.length === 0) {
+      setError('No shipments with email addresses found. Please select shipments that have supplier email addresses.');
       return;
     }
 
     setSending(true);
     setSuccess(false);
+    setError(null);
+    setEmailResults(null);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-
       if (scheduleType === 'weekly') {
         // Save schedule configuration
         const scheduleConfig = {
@@ -112,39 +124,77 @@ export default function SendNotificationDialog({
           customMessage,
         };
         localStorage.setItem('notificationSchedule', JSON.stringify(scheduleConfig));
+        setSuccess(true);
+        setTimeout(() => {
+          onClose();
+          setSending(false);
+          setSuccess(false);
+        }, 2000);
       } else {
         // Send immediately
-        for (const shipment of targetShipments) {
-          if (method === 'whatsapp' || method === 'both') {
-            // Open WhatsApp
+        let emailSuccessCount = 0;
+        let emailFailedCount = 0;
+
+        // Handle WhatsApp notifications
+        if (method === 'whatsapp' || method === 'both') {
+          const shipmentsWithPhone = targetShipments.filter(s => s.supplier_phone);
+          shipmentsWithPhone.forEach((shipment) => {
             const phoneNumber = shipment.supplier_phone?.replace(/[^0-9+]/g, '') || '';
             if (phoneNumber) {
               const message = customMessage || generateShipmentNotification(shipment);
               window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
             }
-          }
-          if (method === 'email' || method === 'both') {
-            // Send email via API
-            await fetch('/api/shipments/email', {
+          });
+        }
+
+        // Handle email notifications using batch API
+        if ((method === 'email' || method === 'both') && shipmentsWithEmail.length > 0) {
+          try {
+            const response = await fetch('/api/shipments/email/batch', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
-                shipmentId: shipment.id,
+                shipments: shipmentsWithEmail,
                 customMessage: customMessage || undefined,
+                subject: emailSubject || undefined,
+                sentBy: shipmentsWithEmail[0]?.owner || 'System',
               }),
             });
+
+            const data = await response.json();
+
+            if (!response.ok || !data.success) {
+              throw new Error(data.error || 'Failed to send some emails');
+            }
+
+            emailSuccessCount = data.successCount || 0;
+            emailFailedCount = data.failedCount || 0;
+
+            // Show warning if some shipments don't have emails
+            if (shipmentsWithoutEmail.length > 0) {
+              setError(`${shipmentsWithoutEmail.length} shipment(s) skipped - no email address`);
+            }
+          } catch (emailError) {
+            console.error('Error sending emails:', emailError);
+            setError(emailError instanceof Error ? emailError.message : 'Failed to send emails');
+            emailFailedCount = shipmentsWithEmail.length;
           }
         }
-      }
 
-      setSuccess(true);
-      setTimeout(() => {
-        onClose();
-        setSending(false);
-        setSuccess(false);
-      }, 2000);
+        setEmailResults({ success: emailSuccessCount, failed: emailFailedCount });
+        setSuccess(true);
+        
+        setTimeout(() => {
+          onClose();
+          setSending(false);
+          setSuccess(false);
+          setError(null);
+          setEmailResults(null);
+        }, 3000);
+      }
     } catch (error) {
       console.error('Error sending notifications:', error);
+      setError(error instanceof Error ? error.message : 'An unexpected error occurred');
       setSending(false);
     }
   };
@@ -170,7 +220,15 @@ export default function SendNotificationDialog({
           <Alert severity="success" sx={{ mb: 3 }}>
             {scheduleType === 'weekly' 
               ? 'Schedule configured successfully!' 
-              : 'Notifications sent successfully!'}
+              : emailResults 
+                ? `Notifications sent! ${emailResults.success} email(s) sent successfully${emailResults.failed > 0 ? `, ${emailResults.failed} failed` : ''}.`
+                : 'Notifications sent successfully!'}
+          </Alert>
+        )}
+
+        {error && (
+          <Alert severity="error" sx={{ mb: 3 }}>
+            {error}
           </Alert>
         )}
 
@@ -293,12 +351,28 @@ export default function SendNotificationDialog({
             </FormControl>
           )}
 
-          <Box sx={{ mt: 2 }}>
+          <Box sx={{ mt: 2, display: 'flex', gap: 1, flexWrap: 'wrap' }}>
             <Chip
               label={`${targetCount} shipments selected`}
               color="primary"
               sx={{ fontWeight: 600 }}
             />
+            {(method === 'email' || method === 'both') && (
+              <>
+                <Chip
+                  label={`${targetShipments.filter(s => s.supplier_email).length} with email`}
+                  color={targetShipments.filter(s => s.supplier_email).length > 0 ? 'success' : 'warning'}
+                  sx={{ fontWeight: 500 }}
+                />
+                {targetShipments.filter(s => !s.supplier_email).length > 0 && (
+                  <Chip
+                    label={`${targetShipments.filter(s => !s.supplier_email).length} without email`}
+                    color="warning"
+                    sx={{ fontWeight: 500 }}
+                  />
+                )}
+              </>
+            )}
           </Box>
         </Box>
 
@@ -369,6 +443,27 @@ export default function SendNotificationDialog({
         </Box>
 
         <Divider sx={{ my: 3 }} />
+
+        {/* Email Subject (only show for email method) */}
+        {(method === 'email' || method === 'both') && (
+          <Box sx={{ mb: 3 }}>
+            <FormLabel component="legend" sx={{ mb: 2, fontWeight: 600 }}>
+              {t('emailSubject') || 'Email Subject (Optional)'}
+            </FormLabel>
+            <TextField
+              fullWidth
+              value={emailSubject}
+              onChange={(e) => setEmailSubject(e.target.value)}
+              placeholder="Leave empty to use default subject..."
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: 2,
+                },
+              }}
+              helperText="Default: 'Delayed Shipment Reminder - [Tracking] / PO [PO Number]'"
+            />
+          </Box>
+        )}
 
         {/* Custom Message */}
         <Box sx={{ mb: 2 }}>

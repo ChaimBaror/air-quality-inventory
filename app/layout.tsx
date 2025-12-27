@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import MuiThemeProvider from '@/components/MuiThemeProvider';
+import { ThemeProvider } from '@/components/common/ThemeProvider';
+import { ToastProvider } from '@/components/common/ToastProvider';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getLocale } from 'next-intl/server';
 
@@ -35,9 +37,12 @@ export default async function RootLayout({
         suppressHydrationWarning
       >
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <MuiThemeProvider>
-            {children}
-          </MuiThemeProvider>
+          <ThemeProvider>
+            <MuiThemeProvider>
+              <ToastProvider />
+              {children}
+            </MuiThemeProvider>
+          </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>

@@ -32,6 +32,7 @@ export interface Shipment {
   updatedAt: Date; // Last update timestamp
   history?: HistoryEntry[]; // Status change history
   images?: string[]; // Photos of shipment/packaging
+  email_history?: EmailHistoryEntry[]; // Email sending history
 }
 
 // Legacy Sample interface (for backward compatibility)

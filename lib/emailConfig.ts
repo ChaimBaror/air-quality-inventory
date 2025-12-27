@@ -99,11 +99,11 @@ export const getEmailTemplate = (data: {
                         <td style="padding: 8px 0; color: #1e293b; font-size: 14px; font-weight: 500;">${po}</td>
                       </tr>
                       <tr>
-                        <td style="padding: 8px 0; color: #64748b; font-size: 14px; font-weight: 600;">Style:</td>
+                        <td style="padding: 8px 0; color: #64748b; font-size: 14px; font-weight: 600;">Tracking Number:</td>
                         <td style="padding: 8px 0; color: #1e293b; font-size: 14px; font-weight: 500;">${style}</td>
                       </tr>
                       <tr>
-                        <td style="padding: 8px 0; color: #64748b; font-size: 14px; font-weight: 600;">Sample Type:</td>
+                        <td style="padding: 8px 0; color: #64748b; font-size: 14px; font-weight: 600;">Type:</td>
                         <td style="padding: 8px 0; color: #1e293b; font-size: 14px; font-weight: 500;">${sampleType}</td>
                       </tr>
                       <tr>
@@ -179,8 +179,8 @@ We hope this message finds you well. We are writing to follow up on a delayed or
 
 Order Details:
 - PO Number: ${po}
-- Style: ${style}
-- Sample Type: ${sampleType}
+- Tracking Number: ${style}
+- Type: ${sampleType}
 - Expected Date: ${expectedDate}
 - Days Overdue: ${daysOverdue} days
 ${notes ? `- Notes: ${notes}` : ''}

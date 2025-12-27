@@ -139,6 +139,7 @@
     "notificationMethod": "Notification Method",
     "selectShipments": "Select Shipments",
     "schedule": "Schedule",
+    "emailSubject": "Email Subject (Optional)",
     "customMessage": "Custom Message (Optional)",
     "customMessagePlaceholder": "Enter a custom message to include in all emails...",
     "delayedShipmentsTitle": "Delayed Shipments Notifications",
@@ -213,7 +214,8 @@
       "delayed": "Delayed",
       "delivered": "Delivered",
       "exception": "Exception"
-    }
+    },
+    "sendNotifications": "Send Notifications"
   },
   "shipmentDetail": {
     "title": "Shipment Details",

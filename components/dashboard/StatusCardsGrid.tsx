@@ -82,14 +82,13 @@ export default function StatusCardsGrid({ statusCounts, dueSoonCount = 0 }: Stat
         mb: 5,
       }}
     >
-      {statusCards.map((card, index) => (
+      {statusCards.map((card) => (
         <StatusCard
           key={card.title}
           title={card.title}
           count={card.count}
           color={card.color}
           icon={card.icon}
-          index={index}
         />
       ))}
     </Box>

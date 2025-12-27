@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({
         success: true,
         message: `Sent ${result.success} emails successfully. ${result.failed} failed.`,
-        ...result,
+        emailResults: result,
       });
     } else if (sampleId) {
       // Send email for a specific sample
@@ -56,11 +56,11 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({
           success: true,
           message: 'Email sent successfully',
-          ...result,
+          messageId: result.messageId,
         });
       } else {
         return NextResponse.json(
-          { success: false, ...result },
+          { success: false, error: result.error },
           { status: 500 }
         );
       }

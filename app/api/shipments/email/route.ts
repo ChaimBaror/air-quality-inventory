@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sendDelayedShipmentEmail } from '@/lib/shipmentEmailService';
 import { mockShipments } from '@/lib/shipmentData';
+import { EmailHistoryEntry } from '@/types';
 
 /**
  * POST /api/shipments/email
@@ -9,7 +10,7 @@ import { mockShipments } from '@/lib/shipmentData';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { shipmentId, customMessage } = body;
+    const { shipmentId, customMessage, subject, sentBy } = body;
 
     // Get all shipments (in production, this would come from a database)
     const allShipments = mockShipments;
@@ -29,16 +30,35 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const result = await sendDelayedShipmentEmail(shipment, customMessage);
+    const emailSubject = subject || `Delayed Shipment Reminder - ${shipment.tracking_number} / PO ${shipment.po_number}`;
+    const result = await sendDelayedShipmentEmail(shipment, customMessage, emailSubject);
+    
+    // Create email history entry
+    const emailHistoryEntry: EmailHistoryEntry = {
+      id: `email-${Date.now()}`,
+      timestamp: new Date(),
+      recipient: shipment.supplier_email,
+      subject: emailSubject,
+      status: result.success ? 'sent' : 'failed',
+      messageId: result.messageId,
+      error: result.error,
+      sentBy: sentBy || 'System',
+    };
     
     if (result.success) {
       return NextResponse.json({
+        success: true,
         message: 'Email sent successfully',
-        ...result,
+        emailHistory: emailHistoryEntry,
+        messageId: result.messageId,
       });
     } else {
       return NextResponse.json(
-        result,
+        { 
+          success: false,
+          error: result.error,
+          emailHistory: emailHistoryEntry,
+        },
         { status: 500 }
       );
     }

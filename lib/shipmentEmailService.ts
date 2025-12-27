@@ -35,7 +35,8 @@ export interface EmailResult {
  */
 export const sendDelayedShipmentEmail = async (
   shipment: Shipment,
-  customMessage?: string
+  customMessage?: string,
+  subject?: string
 ): Promise<EmailResult> => {
   try {
     // Validate email configuration
@@ -53,6 +54,15 @@ export const sendDelayedShipmentEmail = async (
       };
     }
 
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(shipment.supplier_email)) {
+      return {
+        success: false,
+        error: `Invalid email address format: ${shipment.supplier_email}`,
+      };
+    }
+
     // Calculate days overdue
     const expectedDate = shipment.expected_delivery_date;
     const daysOverdue = expectedDate 
@@ -63,21 +73,23 @@ export const sendDelayedShipmentEmail = async (
     const emailData = {
       factoryName: shipment.supplier,
       po: shipment.po_number,
-      style: shipment.tracking_number,
+      style: shipment.tracking_number, // Using tracking_number as style identifier
       sampleType: `Shipment (${shipment.carrier})`,
       expectedDate: formatDate(expectedDate),
       daysOverdue,
       notes: customMessage || shipment.notes || '',
+      trackingNumber: shipment.tracking_number,
+      carrier: shipment.carrier,
     };
 
     // Generate subject
-    const subject = `Delayed Shipment Reminder - ${shipment.tracking_number} / PO ${shipment.po_number}`;
+    const emailSubject = subject || `Delayed Shipment Reminder - ${shipment.tracking_number} / PO ${shipment.po_number}`;
 
     // Prepare email options
     const mailOptions = {
       from: `"${emailConfig.from.name}" <${emailConfig.from.email}>`,
       to: shipment.supplier_email,
-      subject,
+      subject: emailSubject,
       html: getEmailTemplate(emailData),
       text: getEmailTextTemplate(emailData),
     };
@@ -105,7 +117,8 @@ export const sendDelayedShipmentEmail = async (
  */
 export const sendDelayedShipmentsEmails = async (
   shipments: Shipment[],
-  customMessage?: string
+  customMessage?: string,
+  subject?: string
 ): Promise<{ success: number; failed: number; results: Array<{ shipment: Shipment; result: EmailResult }> }> => {
   const delayedShipments = shipments.filter((shipment) => {
     if (shipment.status === 'delivered') return false;
@@ -132,7 +145,7 @@ export const sendDelayedShipmentsEmails = async (
       continue;
     }
 
-    const result = await sendDelayedShipmentEmail(shipment, customMessage);
+    const result = await sendDelayedShipmentEmail(shipment, customMessage, subject);
     results.push({ shipment, result });
 
     if (result.success) {

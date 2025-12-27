@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
       message: `Scheduled email job completed. Sent ${result.success} emails successfully. ${result.failed} failed.`,
       timestamp: new Date().toISOString(),
       dayOfWeek: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dayOfWeek],
-      ...result,
+      emailResults: result,
     });
   } catch (error: unknown) {
     console.error('Error in scheduled email job:', error);
