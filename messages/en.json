@@ -128,7 +128,89 @@
     }
   },
   "app": {
-    "title": "Sample Management System - Inventory Management"
+    "title": "Shipment Tracker - China to USA",
+    "dashboardTab": "Dashboard",
+    "trackerTab": "Shipment Tracker",
+    "trackersTab": "Multiple Trackers"
+  },
+  "shipments": {
+    "title": "Shipment Tracker",
+    "subtitle": "Track shipments from China to USA",
+    "searchPlaceholder": "Search: Tracking, PO, Supplier...",
+    "noResults": "No results found",
+    "tryDifferentSearch": "Try changing your search terms",
+    "export": "Export",
+    "shipments": "{count} shipments",
+    "filterByOwner": "Filter by Owner",
+    "filterByStatus": "Filter by Status",
+    "allOwners": "All Owners",
+    "allStatuses": "All Statuses",
+    "viewDetails": "View Details",
+    "columns": {
+      "trackingNumber": "Tracking #",
+      "carrier": "Carrier",
+      "poNumber": "PO #",
+      "supplier": "Supplier",
+      "origin": "Origin",
+      "destination": "Destination",
+      "status": "Status",
+      "expectedDelivery": "Expected Delivery",
+      "owner": "Owner",
+      "actions": "Actions"
+    },
+    "status": {
+      "pending": "Pending",
+      "inTransit": "In Transit",
+      "inCustoms": "In Customs",
+      "delayed": "Delayed",
+      "delivered": "Delivered",
+      "exception": "Exception"
+    }
+  },
+  "shipmentDetail": {
+    "title": "Shipment Details",
+    "poNumber": "PO Number",
+    "carrier": "Carrier",
+    "supplier": "Supplier",
+    "origin": "Origin",
+    "destination": "Destination",
+    "shipDate": "Ship Date",
+    "expectedDelivery": "Expected Delivery",
+    "actualDelivery": "Actual Delivery",
+    "weight": "Weight",
+    "value": "Value",
+    "owner": "Owner",
+    "notes": "Notes",
+    "history": "History"
+  },
+  "dashboard": {
+    "title": "Shipment Dashboard",
+    "subtitle": "Monitor and track shipments from China to USA",
+    "pending": "Pending",
+    "inTransit": "In Transit",
+    "inCustoms": "In Customs",
+    "delayed": "Delayed",
+    "delivered": "Delivered",
+    "arrivingSoon": "Arriving Soon",
+    "supplierDistribution": "Shipment Distribution by Supplier",
+    "additionalDetails": "Additional Details:",
+    "samples": "samples"
+  },
+  "notifications": {
+    "sendNotifications": "Send Notifications",
+    "notificationMethod": "Notification Method",
+    "selectShipments": "Select Shipments",
+    "schedule": "Schedule",
+    "customMessage": "Custom Message (Optional)"
+  },
+  "shipmentDetail": {
+    "editShipment": "Edit Shipment"
+  },
+  "shipments": {
+    "edit": "Edit"
+  },
+  "trackers": {
+    "title": "Multiple Trackers"
   }
 }
 

@@ -52,12 +52,13 @@ export async function POST(request: NextRequest) {
       dayOfWeek: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dayOfWeek],
       ...result,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error in scheduled email job:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Internal server error';
     return NextResponse.json(
       { 
         success: false, 
-        error: error.message || 'Internal server error',
+        error: errorMessage,
         timestamp: new Date().toISOString(),
       },
       { status: 500 }

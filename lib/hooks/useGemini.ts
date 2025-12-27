@@ -38,8 +38,8 @@ export function useGemini(options: UseGeminiOptions = {}) {
 
       const data: GeminiResponse = await response.json();
       return data.result;
-    } catch (err: any) {
-      const errorMessage = err.message || 'An error occurred';
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
       setError(errorMessage);
       console.error('Gemini API error:', err);
       return null;
@@ -73,8 +73,8 @@ export function useGemini(options: UseGeminiOptions = {}) {
 
       const data: GeminiResponse = await response.json();
       return data.result;
-    } catch (err: any) {
-      const errorMessage = err.message || 'An error occurred';
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
       setError(errorMessage);
       console.error('Gemini API error:', err);
       return null;

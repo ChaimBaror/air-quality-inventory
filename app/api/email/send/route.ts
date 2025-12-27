@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sendDelayedOrderEmail, sendDelayedOrdersEmails } from '@/lib/emailService';
-import { Sample } from '@/types';
 import { mockSamples } from '@/lib/data';
 import { getFactoryEmail } from '@/lib/utils';
 
@@ -71,10 +70,11 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error in email API:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Internal server error';
     return NextResponse.json(
-      { success: false, error: error.message || 'Internal server error' },
+      { success: false, error: errorMessage },
       { status: 500 }
     );
   }

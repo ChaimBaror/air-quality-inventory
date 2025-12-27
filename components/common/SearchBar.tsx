@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, CardContent, TextField, InputAdornment, IconButton, alpha, Box } from '@mui/material';
+import { Card, CardContent, TextField, InputAdornment, IconButton } from '@mui/material';
 import { Search as SearchIcon, Clear as ClearIcon } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
 

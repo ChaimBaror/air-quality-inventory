@@ -26,13 +26,6 @@ import { formatDate, getDueDate, getFactoryName, getPONumber } from '@/lib/utils
 import { differenceInDays } from 'date-fns';
 import StatusChip from '../common/StatusChip';
 
-const STATUS_COLORS: Record<SampleStatus, string> = {
-  overdue: '#ef4444',
-  expected_this_week: '#f59e0b',
-  under_review: '#3b82f6',
-  completed: '#10b981',
-};
-
 interface SampleTableProps {
   samples: Sample[];
   editingCell: { id: string; field: string } | null;

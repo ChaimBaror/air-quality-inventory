@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sample Management - Inventory Management",
-  description: "Inventory management system with supplier notification mechanism",
+  title: "Shipment Tracker - China to USA",
+  description: "Track and manage shipments from China to USA with WhatsApp notifications",
 };
 
 export default async function RootLayout({
@@ -32,6 +32,7 @@ export default async function RootLayout({
     <html lang={locale} dir={locale === 'he' ? 'rtl' : 'ltr'}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning
       >
         <NextIntlClientProvider locale={locale} messages={messages}>
           <MuiThemeProvider>

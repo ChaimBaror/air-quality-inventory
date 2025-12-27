@@ -8,10 +8,9 @@ interface StatusCardProps {
   count: number;
   color: string;
   icon: ReactElement;
-  index: number;
 }
 
-export default function StatusCard({ title, count, color, icon, index }: StatusCardProps) {
+export default function StatusCard({ title, count, color, icon }: StatusCardProps) {
   return (
     <Card
       elevation={0}

@@ -3,8 +3,9 @@
 import { useState } from 'react';
 import { Box, Tabs, Tab, AppBar, Toolbar, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import Dashboard from '@/components/Dashboard';
-import SampleTracker from '@/components/SampleTracker';
+import ShipmentDashboard from '@/components/shipments/ShipmentDashboard';
+import ShipmentTracker from '@/components/shipments/ShipmentTracker';
+import TrackersView from '@/components/shipments/TrackersView';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -58,7 +59,7 @@ export default function Home() {
               color: '#1e293b',
             }}
           >
-            {t('title')}
+            {t('title') || 'Shipment Tracker - China to USA'}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -105,16 +106,20 @@ export default function Home() {
           indicatorColor="primary"
           textColor="primary"
         >
-          <Tab label="Dashboard - Overview" />
-          <Tab label="Sample Tracker - Management Table" />
+          <Tab label={t('dashboardTab') || 'Dashboard'} />
+          <Tab label={t('trackerTab') || 'Shipment Tracker'} />
+          <Tab label={t('trackersTab') || 'Multiple Trackers'} />
         </Tabs>
       </Box>
 
       <TabPanel value={value} index={0}>
-        <Dashboard />
+        <ShipmentDashboard />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <SampleTracker />
+        <ShipmentTracker />
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <TrackersView />
       </TabPanel>
     </Box>
   );

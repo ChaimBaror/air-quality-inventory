@@ -24,12 +24,14 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({ result });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Gemini API error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Failed to generate response from Gemini';
+    const errorStack = error instanceof Error ? error.stack : undefined;
     return NextResponse.json(
       { 
-        error: error.message || 'Failed to generate response from Gemini',
-        details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+        error: errorMessage,
+        details: process.env.NODE_ENV === 'development' ? errorStack : undefined
       },
       { status: 500 }
     );

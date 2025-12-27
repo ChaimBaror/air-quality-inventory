@@ -97,11 +97,12 @@ export const sendDelayedOrderEmail = async (
       success: true,
       messageId: info.messageId,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error sending email:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred while sending email';
     return {
       success: false,
-      error: error.message || 'Unknown error occurred while sending email',
+      error: errorMessage,
     };
   }
 };
