@@ -737,9 +737,18 @@ interface EmailHistoryEntry {
 - ✅ **Advanced Filters** - סינון מתקדם מתקפל עם חיפוש
 - ✅ **Drag & Drop Upload** - העלאת קבצים בגרירה
 - ✅ **Dark Mode** - מצב כהה עם זיהוי אוטומטי
+- ✅ **Keyboard Shortcuts** - קיצורי מקלדת (Ctrl+S, Ctrl+E, וכו')
+
+### 🔧 תיקונים ושיפורים נוספים
+- ✅ **תיקון MUI Grid 7** - תאימות מלאה ל-MUI 7
+- ✅ **Filter Utilities** - פונקציות עזר לסינון ומיון
+- ✅ **Custom Hooks** - useShipments, useOrders, useKeyboardShortcuts
+- ✅ **TypeScript Fixes** - תיקון כל שגיאות הקומפילציה
 
 **למדריך שימוש מפורט:** [IMPROVEMENTS_GUIDE.md](./IMPROVEMENTS_GUIDE.md)  
-**רשימת תכונות חדשות:** [FEATURES_ADDED.md](./FEATURES_ADDED.md)
+**רשימת תכונות חדשות:** [FEATURES_ADDED.md](./FEATURES_ADDED.md)  
+**תיקונים ושיפורים:** [FIXES_AND_IMPROVEMENTS.md](./FIXES_AND_IMPROVEMENTS.md)  
+**התחלה מהירה:** [QUICK_START.md](./QUICK_START.md)
 
 ---
 

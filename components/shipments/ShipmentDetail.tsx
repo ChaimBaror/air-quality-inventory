@@ -109,7 +109,7 @@ export default function ShipmentDetail({ shipment, open, onClose, onEdit }: Ship
           }}
         >
           <Grid container spacing={3}>
-            <Grid item xs={12}>
+            <Grid size={{ xs: 12 }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
                 <Typography variant="h6" sx={{ fontWeight: 700, color: '#1e293b' }}>
                   {shipment.tracking_number}
@@ -139,7 +139,7 @@ export default function ShipmentDetail({ shipment, open, onClose, onEdit }: Ship
               </Link>
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <Typography variant="caption" color="text.secondary">
                 {t('poNumber') || 'PO Number'}
               </Typography>
@@ -148,7 +148,7 @@ export default function ShipmentDetail({ shipment, open, onClose, onEdit }: Ship
               </Typography>
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <Typography variant="caption" color="text.secondary">
                 {t('carrier') || 'Carrier'}
               </Typography>
@@ -157,7 +157,7 @@ export default function ShipmentDetail({ shipment, open, onClose, onEdit }: Ship
               </Typography>
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid size={{ xs: 12 }}>
               <Typography variant="caption" color="text.secondary">
                 {t('supplier') || 'Supplier'}
               </Typography>
@@ -171,7 +171,7 @@ export default function ShipmentDetail({ shipment, open, onClose, onEdit }: Ship
               )}
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <Typography variant="caption" color="text.secondary">
                 {t('origin') || 'Origin'}
               </Typography>
@@ -180,7 +180,7 @@ export default function ShipmentDetail({ shipment, open, onClose, onEdit }: Ship
               </Typography>
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <Typography variant="caption" color="text.secondary">
                 {t('destination') || 'Destination'}
               </Typography>
@@ -189,7 +189,7 @@ export default function ShipmentDetail({ shipment, open, onClose, onEdit }: Ship
               </Typography>
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <Typography variant="caption" color="text.secondary">
                 {t('shipDate') || 'Ship Date'}
               </Typography>
@@ -198,7 +198,7 @@ export default function ShipmentDetail({ shipment, open, onClose, onEdit }: Ship
               </Typography>
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <Typography variant="caption" color="text.secondary">
                 {t('expectedDelivery') || 'Expected Delivery'}
               </Typography>
@@ -208,7 +208,7 @@ export default function ShipmentDetail({ shipment, open, onClose, onEdit }: Ship
             </Grid>
 
             {shipment.actual_delivery_date && (
-              <Grid item xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <Typography variant="caption" color="text.secondary">
                   {t('actualDelivery') || 'Actual Delivery'}
                 </Typography>
@@ -219,7 +219,7 @@ export default function ShipmentDetail({ shipment, open, onClose, onEdit }: Ship
             )}
 
             {shipment.weight && (
-              <Grid item xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <Typography variant="caption" color="text.secondary">
                   {t('weight') || 'Weight'}
                 </Typography>
@@ -230,7 +230,7 @@ export default function ShipmentDetail({ shipment, open, onClose, onEdit }: Ship
             )}
 
             {shipment.value && (
-              <Grid item xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <Typography variant="caption" color="text.secondary">
                   {t('value') || 'Value'}
                 </Typography>
@@ -240,7 +240,7 @@ export default function ShipmentDetail({ shipment, open, onClose, onEdit }: Ship
               </Grid>
             )}
 
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <Typography variant="caption" color="text.secondary">
                 {t('owner') || 'Owner'}
               </Typography>
@@ -257,7 +257,7 @@ export default function ShipmentDetail({ shipment, open, onClose, onEdit }: Ship
             </Grid>
 
             {shipment.notes && (
-              <Grid item xs={12}>
+              <Grid size={{ xs: 12 }}>
                 <Typography variant="caption" color="text.secondary">
                   {t('notes') || 'Notes'}
                 </Typography>
@@ -267,7 +267,7 @@ export default function ShipmentDetail({ shipment, open, onClose, onEdit }: Ship
               </Grid>
             )}
 
-            <Grid item xs={12}>
+            <Grid size={{ xs: 12 }}>
               <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
                 <WhatsAppButton shipment={shipment} variant="button" size="medium" />
                 {onEdit && (

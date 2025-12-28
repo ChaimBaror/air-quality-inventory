@@ -12,7 +12,6 @@ import {
   Chip,
   Stack,
   Paper,
-  IconButton,
   Collapse,
 } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
@@ -59,7 +58,7 @@ export function AdvancedFilters<T extends ShipmentFilters | OrderFilters>({
   const [expanded, setExpanded] = useState(false);
 
   const handleStatusChange = (status: string[]) => {
-    onFiltersChange({ ...filters, status: status.length > 0 ? status as any : undefined });
+    onFiltersChange({ ...filters, status: status.length > 0 ? (status as ShipmentStatus[] | OrderStatus[]) : undefined } as T);
   };
 
   const handleCarrierChange = (carriers: string[]) => {

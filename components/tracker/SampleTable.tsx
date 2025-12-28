@@ -137,8 +137,6 @@ export default function SampleTable({
                 '& .MuiTableCell-root': {
                   color: '#475569',
                   borderColor: '#e2e8f0',
-                },
-                '& .MuiTableCell-root': {
                   transition: 'color 0.2s ease',
                   py: 2,
                 },

@@ -9,7 +9,7 @@ import {
   FilterList as FilterIcon,
 } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
-import { mockShipments, getStatusCounts, getOwners } from '@/lib/shipmentData';
+import { mockShipments, getOwners } from '@/lib/shipmentData';
 import { Shipment, ShipmentStatus } from '@/types';
 import { exportShipmentsToExcel, importShipmentsFromExcel } from '@/lib/shipmentExcelUtils';
 import SearchBar from '@/components/common/SearchBar';
@@ -107,7 +107,7 @@ export default function ShipmentTracker() {
     try {
       exportShipmentsToExcel(shipments, 'shipments_export');
       setSnackbar({ open: true, message: 'Data exported successfully to Excel!' });
-    } catch (error) {
+    } catch {
       setSnackbar({ open: true, message: 'Error exporting to Excel' });
     }
   };

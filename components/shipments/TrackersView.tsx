@@ -46,7 +46,7 @@ export default function TrackersView() {
     }
   };
 
-  const handleEditTracker = (_tracker: Tracker) => {
+  const handleEditTracker = () => {
     // TODO: Implement edit dialog
   };
 
@@ -104,7 +104,7 @@ export default function TrackersView() {
                         size="small"
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleEditTracker(tracker);
+                          handleEditTracker();
                         }}
                         sx={{ p: 0.5 }}
                       >

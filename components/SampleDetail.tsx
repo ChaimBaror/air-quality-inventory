@@ -44,7 +44,7 @@ export default function SampleDetail({ sample, open, onClose }: SampleDetailProp
   const [notes, setNotes] = useState(sample.notes || '');
   const [images, setImages] = useState<string[]>(sample.images || []);
   const [chatMessages, setChatMessages] = useState<Array<{ id: string; text: string; timestamp: Date }>>([
-    { id: '1', text: 'Sample created', timestamp: sample.createdAt },
+    { id: '1', text: 'Sample created', timestamp: sample.createdAt || new Date() },
   ]);
 
   const STATUS_LABELS: Record<string, string> = {

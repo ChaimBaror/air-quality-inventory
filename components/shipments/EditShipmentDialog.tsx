@@ -12,9 +12,9 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Grid,
   Box,
   CircularProgress,
+  Grid,
 } from '@mui/material';
 import { Save as SaveIcon } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
@@ -64,7 +64,7 @@ export default function EditShipmentDialog({
   });
 
   useEffect(() => {
-    if (shipment) {
+    if (open && shipment) {
       setFormData({
         tracking_number: shipment.tracking_number,
         carrier: shipment.carrier,
@@ -88,7 +88,7 @@ export default function EditShipmentDialog({
         notes: shipment.notes,
       });
     }
-  }, [shipment]);
+  }, [open, shipment]);
 
   const handleSave = async () => {
     if (!shipment) return;
@@ -107,7 +107,7 @@ export default function EditShipmentDialog({
             action: 'Shipment updated',
             user: 'Current User',
             changes: Object.keys(formData).reduce((acc, key) => {
-              const oldValue = (shipment as Record<string, unknown>)[key];
+              const oldValue = (shipment as unknown as Record<string, unknown>)[key];
               const newValue = (formData as Record<string, unknown>)[key];
               if (oldValue !== newValue) {
                 acc[key] = { old: oldValue, new: newValue };
@@ -159,7 +159,7 @@ export default function EditShipmentDialog({
       <DialogContent>
         <Box sx={{ pt: 2 }}>
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 fullWidth
                 label="Tracking Number"
@@ -168,7 +168,7 @@ export default function EditShipmentDialog({
                 required
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <FormControl fullWidth>
                 <InputLabel>Carrier</InputLabel>
                 <Select
@@ -186,7 +186,7 @@ export default function EditShipmentDialog({
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 fullWidth
                 label="PO Number"
@@ -195,7 +195,7 @@ export default function EditShipmentDialog({
                 required
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 fullWidth
                 label="Supplier"
@@ -204,7 +204,7 @@ export default function EditShipmentDialog({
                 required
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 fullWidth
                 label="Supplier Phone"
@@ -213,7 +213,7 @@ export default function EditShipmentDialog({
                 placeholder="+86-138-0013-8000"
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 fullWidth
                 label="Supplier Email"
@@ -222,7 +222,7 @@ export default function EditShipmentDialog({
                 onChange={(e) => setFormData({ ...formData, supplier_email: e.target.value })}
               />
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid size={{ xs: 12, sm: 4 }}>
               <TextField
                 fullWidth
                 label="Origin City"
@@ -231,7 +231,7 @@ export default function EditShipmentDialog({
                 required
               />
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid size={{ xs: 12, sm: 4 }}>
               <TextField
                 fullWidth
                 label="Origin Country"
@@ -240,7 +240,7 @@ export default function EditShipmentDialog({
                 required
               />
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid size={{ xs: 12, sm: 4 }}>
               <TextField
                 fullWidth
                 label="Destination City"
@@ -249,7 +249,7 @@ export default function EditShipmentDialog({
                 required
               />
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid size={{ xs: 12, sm: 4 }}>
               <TextField
                 fullWidth
                 label="Destination State"
@@ -258,7 +258,7 @@ export default function EditShipmentDialog({
                 required
               />
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid size={{ xs: 12, sm: 4 }}>
               <TextField
                 fullWidth
                 label="Destination Country"
@@ -267,7 +267,7 @@ export default function EditShipmentDialog({
                 required
               />
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid size={{ xs: 12, sm: 4 }}>
               <TextField
                 fullWidth
                 label="Ship Date"
@@ -277,7 +277,7 @@ export default function EditShipmentDialog({
                 InputLabelProps={{ shrink: true }}
               />
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid size={{ xs: 12, sm: 4 }}>
               <TextField
                 fullWidth
                 label="Expected Delivery Date"
@@ -288,7 +288,7 @@ export default function EditShipmentDialog({
                 required
               />
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid size={{ xs: 12, sm: 4 }}>
               <TextField
                 fullWidth
                 label="Actual Delivery Date"
@@ -298,7 +298,7 @@ export default function EditShipmentDialog({
                 InputLabelProps={{ shrink: true }}
               />
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid size={{ xs: 12, sm: 4 }}>
               <FormControl fullWidth>
                 <InputLabel>Status</InputLabel>
                 <Select
@@ -315,7 +315,7 @@ export default function EditShipmentDialog({
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid size={{ xs: 12, sm: 4 }}>
               <TextField
                 fullWidth
                 label="Weight"
@@ -324,7 +324,7 @@ export default function EditShipmentDialog({
                 placeholder="250kg"
               />
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid size={{ xs: 12, sm: 4 }}>
               <TextField
                 fullWidth
                 label="Volume"
@@ -333,7 +333,7 @@ export default function EditShipmentDialog({
                 placeholder="5m³"
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 fullWidth
                 label="Value (USD)"
@@ -342,7 +342,7 @@ export default function EditShipmentDialog({
                 onChange={(e) => setFormData({ ...formData, value: parseFloat(e.target.value) || 0 })}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 fullWidth
                 label="Owner"
@@ -351,7 +351,7 @@ export default function EditShipmentDialog({
                 required
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={{ xs: 12 }}>
               <TextField
                 fullWidth
                 label="Notes"

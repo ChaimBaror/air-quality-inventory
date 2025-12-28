@@ -24,7 +24,7 @@ interface SendOrderEmailDialogProps {
   open: boolean;
   order: Order;
   onClose: () => void;
-  onSent?: (emailHistory: any) => void;
+  onSent?: (emailHistory: { id: string; timestamp: Date; recipient: string; subject: string; status: 'sent' | 'failed' }) => void;
 }
 
 export default function SendOrderEmailDialog({ open, order, onClose, onSent }: SendOrderEmailDialogProps) {

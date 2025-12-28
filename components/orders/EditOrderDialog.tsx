@@ -34,13 +34,15 @@ interface EditOrderDialogProps {
 
 export default function EditOrderDialog({ open, order, onClose, onSave }: EditOrderDialogProps) {
   const t = useTranslations('orders');
-  const [editedOrder, setEditedOrder] = useState<Order>(order);
-  const [items, setItems] = useState<OrderItem[]>(order.items || []);
+  const [editedOrder, setEditedOrder] = useState<Order>(() => order);
+  const [items, setItems] = useState<OrderItem[]>(() => order.items || []);
 
   useEffect(() => {
-    setEditedOrder(order);
-    setItems(order.items || []);
-  }, [order]);
+    if (open) {
+      setEditedOrder(order);
+      setItems(order.items || []);
+    }
+  }, [open, order]);
 
   const handleSave = () => {
     // Recalculate total from items
@@ -144,7 +146,7 @@ export default function EditOrderDialog({ open, order, onClose, onSave }: EditOr
           </FormControl>
 
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 label={t('orderDate') || 'Order Date'}
                 type="date"
@@ -154,7 +156,7 @@ export default function EditOrderDialog({ open, order, onClose, onSave }: EditOr
                 InputLabelProps={{ shrink: true }}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 label={t('expectedCompletion') || 'Expected Completion'}
                 type="date"
@@ -167,7 +169,7 @@ export default function EditOrderDialog({ open, order, onClose, onSave }: EditOr
                 InputLabelProps={{ shrink: true }}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 label={t('supplierEmail') || 'Supplier Email'}
                 type="email"
@@ -176,7 +178,7 @@ export default function EditOrderDialog({ open, order, onClose, onSave }: EditOr
                 fullWidth
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 label={t('supplierPhone') || 'Supplier Phone'}
                 value={editedOrder.supplier_phone || ''}
@@ -228,7 +230,7 @@ export default function EditOrderDialog({ open, order, onClose, onSave }: EditOr
                   </IconButton>
                 </Box>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} sm={6}>
+                  <Grid size={{ xs: 12, sm: 6 }}>
                     <TextField
                       label="SKU"
                       value={item.sku || ''}
@@ -237,7 +239,7 @@ export default function EditOrderDialog({ open, order, onClose, onSave }: EditOr
                       size="small"
                     />
                   </Grid>
-                  <Grid item xs={12} sm={6}>
+                  <Grid size={{ xs: 12, sm: 6 }}>
                     <TextField
                       label={t('description') || 'Description'}
                       value={item.description}
@@ -247,7 +249,7 @@ export default function EditOrderDialog({ open, order, onClose, onSave }: EditOr
                       required
                     />
                   </Grid>
-                  <Grid item xs={12} sm={4}>
+                  <Grid size={{ xs: 12, sm: 4 }}>
                     <TextField
                       label={t('quantity') || 'Quantity'}
                       type="number"
@@ -258,7 +260,7 @@ export default function EditOrderDialog({ open, order, onClose, onSave }: EditOr
                       required
                     />
                   </Grid>
-                  <Grid item xs={12} sm={4}>
+                  <Grid size={{ xs: 12, sm: 4 }}>
                     <TextField
                       label={t('unitPrice') || 'Unit Price'}
                       type="number"
@@ -269,7 +271,7 @@ export default function EditOrderDialog({ open, order, onClose, onSave }: EditOr
                       required
                     />
                   </Grid>
-                  <Grid item xs={12} sm={4}>
+                  <Grid size={{ xs: 12, sm: 4 }}>
                     <TextField
                       label={t('totalPrice') || 'Total Price'}
                       type="number"

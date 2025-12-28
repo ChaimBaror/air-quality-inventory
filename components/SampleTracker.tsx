@@ -324,7 +324,6 @@ export default function SampleTracker() {
             autoHideDuration={4000}
             onClose={() => setSnackbar({ open: false, message: '' })}
             anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-            TransitionProps={{ direction: 'up' }}
           >
             <Alert
               onClose={() => setSnackbar({ open: false, message: '' })}

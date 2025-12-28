@@ -160,7 +160,7 @@ export default function OrderDetail({ order, onClose, onEdit }: OrderDetailProps
           }}
         >
           <Grid container spacing={3}>
-            <Grid item xs={12}>
+            <Grid size={{ xs: 12 }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
                 <Typography variant="h6" sx={{ fontWeight: 700, color: '#1e293b' }}>
                   {orderWithHistory.po_number}
@@ -177,7 +177,7 @@ export default function OrderDetail({ order, onClose, onEdit }: OrderDetailProps
               </Box>
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <Typography variant="caption" color="text.secondary">
                 {t('customerPo') || 'Customer PO'}
               </Typography>
@@ -186,7 +186,7 @@ export default function OrderDetail({ order, onClose, onEdit }: OrderDetailProps
               </Typography>
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <Typography variant="caption" color="text.secondary">
                 {t('supplier') || 'Supplier'}
               </Typography>
@@ -195,7 +195,7 @@ export default function OrderDetail({ order, onClose, onEdit }: OrderDetailProps
               </Typography>
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <Typography variant="caption" color="text.secondary">
                 {t('orderDate') || 'Order Date'}
               </Typography>
@@ -204,7 +204,7 @@ export default function OrderDetail({ order, onClose, onEdit }: OrderDetailProps
               </Typography>
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <Typography variant="caption" color="text.secondary">
                 {t('expectedCompletion') || 'Expected Completion'}
               </Typography>
@@ -213,7 +213,7 @@ export default function OrderDetail({ order, onClose, onEdit }: OrderDetailProps
               </Typography>
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <Typography variant="caption" color="text.secondary">
                 {t('expectedShipDate') || 'Expected Ship Date'}
               </Typography>
@@ -222,7 +222,7 @@ export default function OrderDetail({ order, onClose, onEdit }: OrderDetailProps
               </Typography>
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <Typography variant="caption" color="text.secondary">
                 {t('actualShipDate') || 'Actual Ship Date'}
               </Typography>
@@ -231,7 +231,7 @@ export default function OrderDetail({ order, onClose, onEdit }: OrderDetailProps
               </Typography>
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <Typography variant="caption" color="text.secondary">
                 {t('totalValue') || 'Total Value'}
               </Typography>
@@ -240,7 +240,7 @@ export default function OrderDetail({ order, onClose, onEdit }: OrderDetailProps
               </Typography>
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <Typography variant="caption" color="text.secondary">
                 {t('owner') || 'Owner'}
               </Typography>
@@ -257,7 +257,7 @@ export default function OrderDetail({ order, onClose, onEdit }: OrderDetailProps
             </Grid>
 
             {orderWithHistory.shipping_address && (
-              <Grid item xs={12}>
+              <Grid size={{ xs: 12 }}>
                 <Typography variant="caption" color="text.secondary">
                   {t('shippingAddress') || 'Shipping Address'}
                 </Typography>
@@ -270,7 +270,7 @@ export default function OrderDetail({ order, onClose, onEdit }: OrderDetailProps
             )}
 
             {orderWithHistory.notes && (
-              <Grid item xs={12}>
+              <Grid size={{ xs: 12 }}>
                 <Typography variant="caption" color="text.secondary">
                   {t('notes') || 'Notes'}
                 </Typography>

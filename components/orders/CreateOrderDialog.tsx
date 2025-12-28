@@ -138,7 +138,7 @@ export default function CreateOrderDialog({ open, onClose, onSave }: CreateOrder
       <DialogContent>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, pt: 2 }}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 label={t('poNumber') || 'PO Number'}
                 value={newOrder.po_number}
@@ -147,7 +147,7 @@ export default function CreateOrderDialog({ open, onClose, onSave }: CreateOrder
                 required
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 label={t('customerPo') || 'Customer PO'}
                 value={newOrder.customer_po || ''}
@@ -155,7 +155,7 @@ export default function CreateOrderDialog({ open, onClose, onSave }: CreateOrder
                 fullWidth
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 label={t('supplier') || 'Supplier'}
                 value={newOrder.supplier}
@@ -164,7 +164,7 @@ export default function CreateOrderDialog({ open, onClose, onSave }: CreateOrder
                 required
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 label={t('supplierEmail') || 'Supplier Email'}
                 type="email"
@@ -173,7 +173,7 @@ export default function CreateOrderDialog({ open, onClose, onSave }: CreateOrder
                 fullWidth
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 label={t('supplierPhone') || 'Supplier Phone'}
                 value={newOrder.supplier_phone || ''}
@@ -181,7 +181,7 @@ export default function CreateOrderDialog({ open, onClose, onSave }: CreateOrder
                 fullWidth
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <FormControl fullWidth>
                 <InputLabel>{t('status') || 'Status'}</InputLabel>
                 <Select
@@ -195,7 +195,7 @@ export default function CreateOrderDialog({ open, onClose, onSave }: CreateOrder
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 label={t('owner') || 'Owner'}
                 value={newOrder.owner}
@@ -204,7 +204,7 @@ export default function CreateOrderDialog({ open, onClose, onSave }: CreateOrder
                 required
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField
                 label={t('orderDate') || 'Order Date'}
                 type="date"
@@ -258,7 +258,7 @@ export default function CreateOrderDialog({ open, onClose, onSave }: CreateOrder
                   </IconButton>
                 </Box>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} sm={6}>
+                  <Grid size={{ xs: 12, sm: 6 }}>
                     <TextField
                       label="SKU"
                       value={item.sku || ''}
@@ -267,7 +267,7 @@ export default function CreateOrderDialog({ open, onClose, onSave }: CreateOrder
                       size="small"
                     />
                   </Grid>
-                  <Grid item xs={12} sm={6}>
+                  <Grid size={{ xs: 12, sm: 6 }}>
                     <TextField
                       label={t('description') || 'Description'}
                       value={item.description}
@@ -277,7 +277,7 @@ export default function CreateOrderDialog({ open, onClose, onSave }: CreateOrder
                       required
                     />
                   </Grid>
-                  <Grid item xs={12} sm={4}>
+                  <Grid size={{ xs: 12, sm: 4 }}>
                     <TextField
                       label={t('quantity') || 'Quantity'}
                       type="number"
@@ -288,7 +288,7 @@ export default function CreateOrderDialog({ open, onClose, onSave }: CreateOrder
                       required
                     />
                   </Grid>
-                  <Grid item xs={12} sm={4}>
+                  <Grid size={{ xs: 12, sm: 4 }}>
                     <TextField
                       label={t('unitPrice') || 'Unit Price'}
                       type="number"
@@ -299,7 +299,7 @@ export default function CreateOrderDialog({ open, onClose, onSave }: CreateOrder
                       required
                     />
                   </Grid>
-                  <Grid item xs={12} sm={4}>
+                  <Grid size={{ xs: 12, sm: 4 }}>
                     <TextField
                       label={t('totalPrice') || 'Total Price'}
                       type="number"

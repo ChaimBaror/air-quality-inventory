@@ -193,7 +193,7 @@ export function exportOrdersToExcel(orders: Order[], options: ExportOptions = {}
   XLSX.utils.book_append_sheet(workbook, ordersWorksheet, sheetName);
 
   // Order Items sheet
-  const itemsData: any[] = [];
+  const itemsData: Record<string, string | number>[] = [];
   orders.forEach(order => {
     if (order.items && order.items.length > 0) {
       order.items.forEach(item => {
@@ -253,7 +253,7 @@ export function exportOrdersToExcel(orders: Order[], options: ExportOptions = {}
 /**
  * Export to CSV format
  */
-export function exportToCSV<T extends Record<string, any>>(
+export function exportToCSV<T extends Record<string, unknown>>(
   data: T[],
   filename: string = `export-${format(new Date(), 'yyyy-MM-dd')}.csv`
 ) {

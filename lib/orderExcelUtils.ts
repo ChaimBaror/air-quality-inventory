@@ -78,7 +78,7 @@ export const importOrdersFromExcel = (file: File): Promise<Order[]> => {
         const workbook = XLSX.read(data, { type: 'array' });
 
         // Read orders sheet (first sheet or sheet named 'Orders')
-        let ordersSheetName = workbook.SheetNames.find(name => 
+        const ordersSheetName = workbook.SheetNames.find(name => 
           name.toLowerCase().includes('order') && !name.toLowerCase().includes('item')
         ) || workbook.SheetNames[0];
         
@@ -86,7 +86,7 @@ export const importOrdersFromExcel = (file: File): Promise<Order[]> => {
         const ordersJsonData = XLSX.utils.sheet_to_json(ordersWorksheet);
 
         // Read items sheet if exists
-        let itemsSheetName = workbook.SheetNames.find(name => 
+        const itemsSheetName = workbook.SheetNames.find(name => 
           name.toLowerCase().includes('item')
         );
         
